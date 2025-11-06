@@ -1,0 +1,14 @@
+
+body {
+    background-color: #1A4452;
+    color: white;
+    font-family: 'Baloo 2';
+    margin: 0;
+    padding: 0;
+  }
+
+  main {
+    padding: 50px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
