@@ -71,8 +71,9 @@ import LightImg from '../assets/light.png';
 
       <section class="left-title">
         <div class="title-wrapper">
-          <h2>Smarter Choices for the Planet <Image src={LightImg} alt="Left Title Image" /></h2>
-          </div>
+          <h2>Smarter Choices for the Planet</h2>
+          <Image src={LightImg} alt="Left Title Image" />
+        </div>
       </section>
   </main>
 
@@ -199,41 +200,34 @@ import LightImg from '../assets/light.png';
 
 .left-title {
   width: 85vw;             
-  overflow: hidden;
-  display: flex;
   justify-content: flex-start;
   margin: 100px -600px;    
   border-top-right-radius: 20px;  
   border-bottom-right-radius: 20px; 
   color: #F9FCF9;
-  background-color: #143943;    
+  background-color: #143943;   
 }
 
 .title-wrapper {
-  display: flex;                 /* Tekst og billede på samme linje */
-  align-items: center;           /* Vertikal centrering */
-  padding: 20px 150px;            /* lidt padding inde i kassen */
-  gap: 20px;                     /* afstand mellem tekst og billede */
+  display: flex;         
+  padding: 20px 150px;                 
 }
 
 .left-title h2 {
-  font-size: 2rem;
+  font-size: 2.5rem;
   display: inline-block;
-  padding: 60px 700px 60px 450px; 
+  padding: 10px 700px 10px 330px; 
   border-top-right-radius: 20px;  
   border-bottom-right-radius: 20px;
-  text-align: right;      
+  text-align: center;  
   margin: 0;   
   flex-shrink: 0;
 }
 
-.title-wrapper img {
-  max-width: 150px;   /* gør billedet synligt og proportionelt */
-  width: auto;
+.left-title img {
+  width: 150px;
   height: auto;
-  object-fit: cover;
-}
-
+  margin-left: -700px;   
 
 </style>
 </Layout>
