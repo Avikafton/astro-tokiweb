@@ -1,0 +1,28 @@
+---
+export async function getStaticPaths() {
+  const endpoint = "https://zkmujamnmqaduorxifhm.supabase.co/rest/v1/toki?select=*";
+
+  const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprbXVqYW1ubXFhZHVvcnhpZmhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxNDA0MDQsImV4cCI6MjA3ODcxNjQwNH0.j_JD3IhIE1NNbCVCpxnJ1jJ_0IoNr9iT-9LKskbRP7E";
+  const options = {
+    method: "GET",
+    headers: {
+      apikey: key,
+    },
+  };
+
+  const response = await fetch(endpoint, options);
+  const data = await response.json();
+
+  return data.map((post) => {
+    return {
+      params: { id: post.id },
+      props: { post },
+    };
+  });
+}
+
+const { id } = Astro.params;
+const { post } = Astro.props;
+---
+
+<h1>{id}: {post.name}</h1>

@@ -1,239 +1,219 @@
 ---
-import Header from '../components/Header.astro';
-import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import IndexImg from '../assets/index.png';
-import GlassImg from '../assets/glass.png';
-import BoxImg from '../assets/box.png';
-import PaperImg from '../assets/paper.png';
-import DesignedImg from '../assets/designed.png';
-import TaperullerImg from '../assets/taperuller.png';
-import PlasticImg from '../assets/plastic.png';
-import TokiflowImg from '../assets/tokiflow.png';
-import LightImg from '../assets/light.png';
+import Header from "../components/Header.astro";
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import IndexImg from "../assets/index.png";
+import TokiflowImg from "../assets/tokiflow.png";
+import LightImg from "../assets/light.png";
+
+const endpoint = "https://zkmujamnmqaduorxifhm.supabase.co/rest/v1/toki?select=*";
+
+const key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprbXVqYW1ubXFhZHVvcnhpZmhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMxNDA0MDQsImV4cCI6MjA3ODcxNjQwNH0.j_JD3IhIE1NNbCVCpxnJ1jJ_0IoNr9iT-9LKskbRP7E";
+const options = {
+  method: "GET",
+  headers: {
+    apikey: key,
+  },
+};
+
+const response = await fetch(endpoint, options);
+const data = await response.json();
 ---
+
 <Layout>
   <Header />
-  
+
   <main>
-	<div class="hero">
-      <h1>Sustainable Packaging <br/>for a Better Future</h1>
+    <div class="hero">
+      <h1>Sustainable packaging for a better future</h1>
       <Image src={IndexImg} alt="Index" class="hero-image" />
-	</div>
+    </div>
 
     <div class="cta">
       <button>Learn more</button>
     </div>
 
- 
-    <div class="grid">
-		<div class="grid-item slim">
-			<h3>Glass Packaging</h3>
-			<Image src={GlassImg} alt="Glass" class="" />
-		  </div>
-
-      <div class="grid-item">
-        <h3>Box Packaging</h3>
-		<Image src={BoxImg} alt="Box" class="" />
-      </div>
-
-      <div class="grid-item plastic">
-        <h3>Plastic Packaging</h3>
-		<Image src={PlasticImg} alt="Plastic" class="" />
-      </div>
-    </div>
-
-    <div class="grid">
-      <div class="grid-item">
-        <h3>Custom Packaging</h3>
-		<Image src={DesignedImg} alt="Designed" class="" />
-      </div>
-
-      <div class="grid-item">
-        <h3>Sustainable Tape</h3>
-		<Image src={TaperullerImg} alt="Taperuller" class="" />
-      </div>
-
-      <div class="grid-item slim">
-        <h3>Paper Packaging</h3>
-		<Image src={PaperImg} alt="Paper" class="" />
-      </div>
-    </div>
-
-
-
     <section class="toki-flow">
       <h2>Toki Flow</h2>
     </section>
-      <div class="toki-flow-image">
-        <Image src={TokiflowImg} alt="Toki Flow Image" />
-      </div>
+    <div class="toki-flow-image">
+      <Image src={TokiflowImg} alt="Toki Flow Image" />
+    </div>
 
-      <section class="left-title">
-        <div class="title-wrapper">
-          <h2>Smarter Choices for the Planet <Image src={LightImg} alt="Left Title Image" /></h2>
-          </div>
-      </section>
+    <section class="left-title">
+      <div class="title-wrapper">
+        <h2>Smarter Choices for the Planet <Image src={LightImg} alt="Left Title Image" /></h2>
+      </div>
+    </section>
+
+    <div class="grid">
+      {
+        data.map((item) => (
+          <a href={`/cards/${item.id}`} class="grid-item">
+            <h3>{item.Title}</h3>
+            {item.imgs && <img src={item.imgs} alt={item.title} />}
+          </a>
+        ))
+      }
+    </div>
   </main>
 
-<style>
-.hero {
-	display: flex;
-	align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  margin-bottom: 10px;
-}
+  <style>
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
 
-.hero h1 {
-  text-align: left; 
-  font-size: 60px;
-  color: #F9FCF9;
-}
+    .hero h1 {
+      text-align: left;
+      font-size: 60px;
+      color: #f9fcf9;
+    }
 
-.hero-image {
-  width: 350px;
-  height: auto;
-}
+    .hero-image {
+      width: 350px;
+      height: auto;
+    }
 
-.cta {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 100px;
-}
+    .cta {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 100px;
+    }
 
-.cta button {
-  font-family: 'Baloo 2';
-  padding: 10px 50px;
-  font-size: 1.2rem;
-  background-color: #4DB652;
-  color: #F9FCF9;
-  cursor: pointer;
-  border-radius: 20px;
-	border: none;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
+    .cta button {
+      font-family: "Baloo 2";
+      padding: 10px 50px;
+      font-size: 1.2rem;
+      background-color: #4db652;
+      color: #f9fcf9;
+      cursor: pointer;
+      border-radius: 20px;
+      border: none;
+      transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+    }
 
-.cta button:hover {
-  padding: 10px 50px;
-  font-size: 1.2rem;
-  background-color: #B2F432;
-  color: #F9FCF9;
-  cursor: pointer;
-  border-radius: 20px;
-	border: none;
-  transform: scale(1.05); 
-}
+    .cta button:hover {
+      padding: 10px 50px;
+      font-size: 1.2rem;
+      background-color: #b2f432;
+      color: #f9fcf9;
+      cursor: pointer;
+      border-radius: 20px;
+      border: none;
+      transform: scale(1.05);
+    }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
 
-.grid-item {
-  background-color: #143943;
-  border: none;
-	border-radius: 20px;
-  text-align: center;
-  padding: 20px;
-}
+    .grid-item {
+      background-color: #143943;
+      border: none;
+      border-radius: 20px;
+      text-align: center;
+      padding: 20px;
+    }
 
-.grid-item h3 {
-  color: #F9FCF9;
-  margin-bottom: 10px;
-}
+    .grid-item h3 {
+      color: #f9fcf9;
+      margin-bottom: 10px;
+    }
 
-.grid-item img {
- max-width: 150px;
- width: 100%;
- height: 150px; 
-}
+    .grid-item img {
+      max-width: 150px;
+      width: 100%;
+      height: 150px;
+    }
 
-.grid-item.slim img {
-  width: 40%;
-}
+    .grid-item.slim img {
+      width: 40%;
+    }
 
-.grid-item.plastic img {
-  width: 25%;
-}
+    .grid-item.plastic img {
+      width: 25%;
+    }
 
-.toki-flow {
-  width: 85vw;           
-  overflow: hidden;       
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; 
-  margin: 100px 0;
-}
+    .toki-flow {
+      width: 85vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      margin: 100px 0;
+    }
 
-.toki-flow h2 {
-  font-size: 2rem;
-  color: #F9FCF9;
-  background-color: #143943;
-  display: inline-block;
-  padding: 10px 500px 10px 20px;  
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
-  text-align: left;
-  margin: 0;
-  max-width: 100%;       
-  box-sizing: border-box; 
-}
+    .toki-flow h2 {
+      font-size: 2rem;
+      color: #f9fcf9;
+      background-color: #143943;
+      display: inline-block;
+      padding: 10px 500px 10px 20px;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      text-align: left;
+      margin: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
 
-.toki-flow-image {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-}
+    .toki-flow-image {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+    }
 
-.toki-flow-image img {
-  max-width: 400px;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
+    .toki-flow-image img {
+      max-width: 400px;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
 
+    .left-title {
+      width: 85vw;
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-start;
+      margin: 100px -600px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      color: #f9fcf9;
+      background-color: #143943;
+    }
 
+    .title-wrapper {
+      display: flex; /* Tekst og billede på samme linje */
+      align-items: center; /* Vertikal centrering */
+      padding: 20px 150px; /* lidt padding inde i kassen */
+      gap: 20px; /* afstand mellem tekst og billede */
+    }
 
-.left-title {
-  width: 85vw;             
-  overflow: hidden;
-  display: flex;
-  justify-content: flex-start;
-  margin: 100px -600px;    
-  border-top-right-radius: 20px;  
-  border-bottom-right-radius: 20px; 
-  color: #F9FCF9;
-  background-color: #143943;    
-}
+    .left-title h2 {
+      font-size: 2rem;
+      display: inline-block;
+      padding: 60px 700px 60px 450px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      text-align: right;
+      margin: 0;
+      flex-shrink: 0;
+    }
 
-.title-wrapper {
-  display: flex;                 /* Tekst og billede på samme linje */
-  align-items: center;           /* Vertikal centrering */
-  padding: 20px 150px;            /* lidt padding inde i kassen */
-  gap: 20px;                     /* afstand mellem tekst og billede */
-}
-
-.left-title h2 {
-  font-size: 2rem;
-  display: inline-block;
-  padding: 60px 700px 60px 450px; 
-  border-top-right-radius: 20px;  
-  border-bottom-right-radius: 20px;
-  text-align: right;      
-  margin: 0;   
-  flex-shrink: 0;
-}
-
-.title-wrapper img {
-  max-width: 150px;   /* gør billedet synligt og proportionelt */
-  width: auto;
-  height: auto;
-  object-fit: cover;
-}
-
-
-</style>
+    .title-wrapper img {
+      max-width: 150px; /* gør billedet synligt og proportionelt */
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
+  </style>
 </Layout>
