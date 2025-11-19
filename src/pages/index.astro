@@ -4,7 +4,7 @@ import Footer from "../components/footer.astro";
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import IndexImg from "../assets/index.png";
-import TokiflowImg from "../assets/tokiflow.png";
+import TokiflowImg from "../assets/1tokiflow.png";
 import LightImg from "../assets/light.png";
 
 const endpoint = "https://zkmujamnmqaduorxifhm.supabase.co/rest/v1/toki?select=*";
@@ -39,9 +39,45 @@ const data = await response.json();
     <section class="toki-flow reveal">
       <h2>Toki Flow</h2>
     </section>
-    <div class="toki-flow-image reveal">
-      <Image src={TokiflowImg} alt="Toki Flow Image" />
-    </div>
+      
+    <div id="pointer" style="
+        position: absolute;
+        top: 845px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 40px solid #b2f432; /* spids nedad */
+        z-index: 10;
+      "></div>
+
+      <div style="position: relative; display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
+        <div id="tokiText" style="
+            width: 250px;
+            height: 350px;
+            color: #f9fcf9;
+            background-color: #143943;
+            padding: 20px;
+            border-radius: 10px;
+            position: absolute;
+            top: 20px;
+            left: 0;
+            overflow-y: auto;
+            box-sizing: border-box;
+            cursor: pointer;
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        ">
+          <strong>Click the wheel to learn about Toki Flow!</strong>
+        </div>
+      
+        <div class="toki-flow-image" id="tokiWheel" style="width: 400px; cursor: pointer; transition: transform 0.5s ease-out;">
+          <Image src={TokiflowImg} alt="Toki Flow Image" style="width: 100%; height: auto; display: block;" />
+        </div>
+      </div>
 
     <section class="left-title reveal">
       <div class="title-wrapper">
@@ -60,6 +96,9 @@ const data = await response.json();
       }
     </div>
   </main>
+
+
+
   <Footer />
   <style>
     .reveal {
@@ -193,18 +232,7 @@ const data = await response.json();
       box-sizing: border-box;
     }
 
-    .toki-flow-image {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .toki-flow-image img {
-      max-width: 400px;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
+  
 
     .left-title {
       width: 100vw;
@@ -247,6 +275,10 @@ const data = await response.json();
       height: auto;
       object-fit: cover;
     }
+
+
+
+    
     @media (max-width: 768px) {
       :global(body) {
         overflow-x: hidden;
@@ -370,5 +402,45 @@ const data = await response.json();
         document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
       });
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+  let currentRotation = 0;
+  const wheel = document.getElementById("tokiWheel");
+  const textBox = document.getElementById("tokiText");
+
+  const messages = [
+  "<strong>INSIGHT:</strong> We conduct extensive research to identify opportunities for sustainable packaging solutions. This involves analyzing raw materials, assessing environmental impact, understanding consumer behavior, and evaluating market trends. Our goal is to uncover actionable insights that help businesses reduce their ecological footprint while staying innovative and competitive in the market.",
+
+  "<strong>DESIGN DNA:</strong> We develop packaging concepts that combine aesthetics, functionality, and sustainability. Every design decision—from material selection to shape and branding—is carefully considered to minimize waste, energy consumption, and carbon emissions. Our designs aim to create a memorable user experience while adhering to eco-friendly principles.",
+
+  "<strong>SOLUTION:</strong> Based on our research and design DNA, we create concrete solutions that include prototypes, testing methods, and optimized production techniques. We focus on innovative approaches such as biodegradable materials, reusable packaging, and modular designs that can be scaled efficiently while maintaining high-quality standards.",
+
+  "<strong>IDEAS:</strong> We continuously generate new ideas for products and services that contribute to a circular economy. Our brainstorming sessions and collaborative workshops emphasize creativity, sustainability, and practicality, encouraging novel solutions that are both environmentally responsible and commercially viable.",
+
+  "<strong>SCALING:</strong> We strategize how to implement our solutions on a larger scale. This includes planning manufacturing processes, logistics, distribution, and marketing strategies that enable widespread adoption. Our focus is on empowering businesses to transition to sustainable packaging practices without compromising efficiency or profitability."
+];
+
+  wheel.addEventListener("click", () => {
+    currentRotation -= 72;
+    wheel.style.transform = `rotate(${currentRotation}deg)`;
+
+    const index = ((-currentRotation / 72) % messages.length + messages.length) % messages.length;
+    textBox.innerHTML = messages[index];
+
+    // vis boksen hvis den var skjult
+    textBox.style.visibility = "visible";
+    textBox.style.opacity = "1";
+  });
+
+  textBox.addEventListener("click", () => {
+    if (textBox.style.visibility === "hidden") {
+      textBox.style.visibility = "visible";
+      textBox.style.opacity = "1";
+    } else {
+      textBox.style.visibility = "hidden";
+      textBox.style.opacity = "0";
+    }
+  });
+});
   </script>
 </Layout>
