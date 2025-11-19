@@ -1,0 +1,263 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/footer.astro";
+import { Image } from "astro:assets";
+
+import ContactImg from "../assets/Contact.png";
+---
+
+<Layout>
+  <Header />
+
+  <main class="contact-page">
+    <!-- HERO: Contact + illustration + grøn knap -->
+    <section class="contact-hero">
+      <div class="contact-hero-text">
+        <h1>Contact</h1>
+        <p>
+          We’d love to hear from you – whether you’re curious, collaborating,
+          or ready to rethink packaging.
+        </p>
+        <button class="primary-btn">Send a message</button>
+      </div>
+
+      <div class="contact-hero-image">
+        <Image src={ContactImg} alt="Contact illustration" />
+      </div>
+    </section>
+
+    <!-- SEKTION 2: Let's build something together + form -->
+    <section class="contact-build">
+      <div class="build-text">
+        <h2>Let’s build something<br />together</h2>
+
+        <p>
+          We work with brands, creators, and visionaries to design packaging
+          that truly matters.
+        </p>
+        <p>
+          From concept to creation, we craft thoughtful, sustainable solutions
+          that tell your story and respect the planet.
+        </p>
+        <p>Reach out — and let’s start your TÓKI flow.</p>
+
+        <div class="contact-info">
+          <div class="info-row">
+            <span class="info-icon">📍</span>
+            <span class="info-text">Copenhagen, Denmark</span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">✉️</span>
+            <span class="info-text">hello@toki.dk</span>
+          </div>
+          <div class="info-row">
+            <span class="info-icon">🌍</span>
+            <span class="info-text">www.toki.dk</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="build-form-wrapper">
+        <div class="contact-form-card">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" type="text" />
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input id="company" type="text" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" />
+          </div>
+
+          <div class="form-group form-message">
+            <label for="message">Message</label>
+            <textarea id="message" rows="4" />
+          </div>
+        </div>
+
+        <button class="primary-btn submit-btn">Submit</button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-page {
+    display: flex;
+    flex-direction: column;
+    gap: 120px;
+  }
+
+  /* HERO */
+  .contact-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    margin-top: 50px;
+  }
+
+  .contact-hero-text h1 {
+    font-size: 3rem;
+    color: #f9fcf9;
+    margin-bottom: 10px;
+  }
+
+  .contact-hero-text p {
+    color: #f9fcf9;
+    max-width: 420px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+  }
+
+  .contact-hero-image img {
+    width: 320px;
+    height: auto;
+  }
+
+  .primary-btn {
+    font-family: "Baloo 2";
+    padding: 12px 50px;
+    font-size: 1.2rem;
+    background-color: #4db652;
+    color: #f9fcf9;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition:
+      transform 0.25s ease,
+      background-color 0.25s ease;
+  }
+
+  .primary-btn:hover {
+    background-color: #b2f432;
+    transform: scale(1.05);
+  }
+
+  /* BUILD SOMETHING + FORM */
+  .contact-build {
+    display: grid;
+    grid-template-columns: 1.4fr 1.2fr;
+    gap: 80px;
+    align-items: flex-start;
+    margin-bottom: 80px;
+  }
+
+  .build-text h2 {
+    font-size: 2.5rem;
+    color: #f9fcf9;
+    margin-bottom: 20px;
+  }
+
+  .build-text p {
+    color: #f9fcf9;
+    max-width: 460px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .contact-info {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .info-icon {
+    font-size: 1.4rem;
+  }
+
+  .info-text {
+    color: #f9fcf9;
+    font-size: 1rem;
+  }
+
+  .build-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+  }
+
+  .contact-form-card {
+    background-color: #f9fcf9;
+    border-radius: 16px;
+    padding: 24px 26px 26px;
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .form-group {
+    background-color: #143943;
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    color: #f9fcf9;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    border-radius: 6px;
+    border: none;
+    padding: 8px 10px;
+    font-size: 0.95rem;
+    outline: none;
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 90px;
+  }
+
+  .submit-btn {
+    align-self: center;
+  }
+
+  /* Responsiv */
+  @media (max-width: 900px) {
+    .contact-hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .contact-hero-image img {
+      width: 260px;
+    }
+
+    .contact-build {
+      grid-template-columns: 1fr;
+    }
+
+    .build-form-wrapper {
+      align-items: stretch;
+    }
+
+    .submit-btn {
+      align-self: center;
+    }
+  }
+</style>

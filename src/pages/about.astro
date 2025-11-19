@@ -1,0 +1,286 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/footer.astro";
+
+import { Image } from "astro:assets";
+
+// billeder
+import AboutImg from "../assets/about.png";
+import About2Img from "../assets/about2.png";
+import About3Img from "../assets/About3.png";
+import About4Img from "../assets/About4.png";
+import About5Img from "../assets/About5.png";
+import About6Img from "../assets/About6.png";
+---
+
+<Layout>
+  <Header />
+
+  <main class="about-page">
+    <!-- HERO -->
+    <section class="about-hero">
+      <div class="about-hero-left">
+        <h1>About TÓKI</h1>
+        <p>Born from a love of design, functionality and the planet</p>
+        <button class="btn-primary">Work with us</button>
+      </div>
+
+      <div class="about-hero-right">
+        <Image src={AboutImg} alt="About TÓKI hero" />
+      </div>
+    </section>
+
+    <!-- STORY-CARD (mørk boks) -->
+    <section class="story-card">
+      <div class="story-text">
+        <h2>
+          TÓKI was founded with one belief – that packaging can be a force for good.
+        </h2>
+
+        <p>
+          We see packaging not just as protection, but as communication – a way for brands
+          to express values, inspire trust, and make sustainability tangible.
+        </p>
+        <p>
+          Rooted in Scandinavian design thinking, we create solutions that balance form,
+          function and environmental responsibility.
+        </p>
+        <p>
+          Our approach combines clean aesthetics, responsible materials and innovative
+          production methods to reduce waste and promote circularity.
+        </p>
+      </div>
+
+      <div class="story-image">
+        <Image src={About2Img} alt="Sustainable packaging" />
+      </div>
+    </section>
+
+    <!-- WHAT DRIVES US -->
+    <section class="drives-section">
+      <div class="drives-title-wrapper">
+        <h2>What drives us</h2>
+      </div>
+
+      <!-- ikonerne -->
+      <div class="about-icons">
+        <div class="icon-card">
+          <Image src={About3Img} alt="Design for impact" />
+          <h3>Design for impact</h3>
+          <p>We merge beauty and purpose.</p>
+        </div>
+
+        <div class="icon-card">
+          <Image src={About4Img} alt="Built for the planet" />
+          <h3>Built for the planet</h3>
+          <p>Sustainability guides every material choice.</p>
+        </div>
+
+        <div class="icon-card">
+          <Image src={About5Img} alt="Driven by insight" />
+          <h3>Driven by insight</h3>
+          <p>Our ideas grow from understanding.</p>
+        </div>
+
+        <div class="icon-card">
+          <Image src={About6Img} alt="Created together" />
+          <h3>Created together</h3>
+          <p>Collaboration shapes every solution.</p>
+        </div>
+      </div>
+
+      <!-- knap centreret under ikonerne -->
+      <div class="drives-cta">
+        <button class="btn-primary">Work with us</button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .about-page {
+    display: flex;
+    flex-direction: column;
+    gap: 90px;
+  }
+
+  /* HERO */
+  .about-hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  .about-hero-left h1 {
+    font-size: 3rem;
+    color: #f9fcf9;
+    margin-bottom: 10px;
+  }
+
+  .about-hero-left p {
+    color: #f9fcf9;
+    max-width: 320px;
+    margin-bottom: 20px;
+  }
+
+  .about-hero-right img {
+    max-width: 340px;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .btn-primary {
+    font-family: "Baloo 2";
+    padding: 10px 50px;
+    font-size: 1.1rem;
+    background-color: #4db652;
+    color: #f9fcf9;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #b2f432;
+    transform: scale(1.05);
+  }
+
+  /* STORY-CARD */
+  .story-card {
+    background-color: #143943;
+    border-radius: 20px;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .story-text h2 {
+    color: #f9fcf9;
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+  }
+
+  .story-text p {
+    color: #f9fcf9;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .story-image img {
+    max-width: 260px;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* WHAT DRIVES US */
+  .drives-section {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .drives-title-wrapper {
+    width: 85vw;
+    margin: 0 0 10px auto; /* skubber til højre */
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .drives-title-wrapper h2 {
+    font-size: 2rem;
+    color: #f9fcf9;
+    background-color: #143943;
+    padding: 12px 400px 12px 20px;
+    border-radius: 20px 0 0 20px;
+    white-space: nowrap;
+  }
+
+  .about-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .icon-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 280px; /* så alle fire fylderr det samme */
+  }
+
+  .icon-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 15px;
+  }
+
+  .icon-card h3 {
+    color: #f9fcf9;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+  }
+
+  .icon-card p {
+    color: #f9fcf9;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 230px;
+  }
+
+  .drives-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1000px) {
+    .story-card {
+      grid-template-columns: 1fr;
+    }
+
+    .drives-title-wrapper h2 {
+      padding-right: 180px;
+    }
+
+    .about-icons {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .about-hero {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .drives-title-wrapper {
+      width: 100%;
+    }
+
+    .drives-title-wrapper h2 {
+      padding-right: 40px;
+      font-size: 1.6rem;
+    }
+
+    .about-icons {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
