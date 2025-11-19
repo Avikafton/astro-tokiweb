@@ -12,37 +12,28 @@ import ContactImg from "../assets/Contact.png";
 
   <main class="contact-page">
     <!-- HERO: Contact + illustration + grøn knap -->
-    <section class="contact-hero">
+    <section class="contact-hero reveal">
       <div class="contact-hero-text">
         <h1>Contact</h1>
-        <p>
-          We’d love to hear from you – whether you’re curious, collaborating,
-          or ready to rethink packaging.
-        </p>
+        <p>We’d love to hear from you – whether you’re curious, collaborating, or ready to rethink packaging.</p>
         <button class="primary-btn">Send a message</button>
       </div>
 
-      <div class="contact-hero-image">
+      <div class="contact-hero-image reveal">
         <Image src={ContactImg} alt="Contact illustration" />
       </div>
     </section>
 
     <!-- SEKTION 2: Let's build something together + form -->
-    <section class="contact-build">
+    <section class="contact-build reveal">
       <div class="build-text">
         <h2>Let’s build something<br />together</h2>
 
-        <p>
-          We work with brands, creators, and visionaries to design packaging
-          that truly matters.
-        </p>
-        <p>
-          From concept to creation, we craft thoughtful, sustainable solutions
-          that tell your story and respect the planet.
-        </p>
+        <p>We work with brands, creators, and visionaries to design packaging that truly matters.</p>
+        <p>From concept to creation, we craft thoughtful, sustainable solutions that tell your story and respect the planet.</p>
         <p>Reach out — and let’s start your TÓKI flow.</p>
 
-        <div class="contact-info">
+        <div class="contact-info reveal">
           <div class="info-row">
             <span class="info-icon">📍</span>
             <span class="info-text">Copenhagen, Denmark</span>
@@ -59,7 +50,7 @@ import ContactImg from "../assets/Contact.png";
       </div>
 
       <div class="build-form-wrapper">
-        <div class="contact-form-card">
+        <div class="contact-form-card reveal">
           <div class="form-group">
             <label for="name">Name</label>
             <input id="name" type="text" />
@@ -77,11 +68,11 @@ import ContactImg from "../assets/Contact.png";
 
           <div class="form-group form-message">
             <label for="message">Message</label>
-            <textarea id="message" rows="4" />
+            <textarea id="message" rows="4"></textarea>
           </div>
         </div>
 
-        <button class="primary-btn submit-btn">Submit</button>
+        <button class="primary-btn submit-btn reveal">Submit</button>
       </div>
     </section>
   </main>
@@ -237,6 +228,19 @@ import ContactImg from "../assets/Contact.png";
     align-self: center;
   }
 
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   /* Responsiv */
   @media (max-width: 900px) {
     .contact-hero {
@@ -261,3 +265,23 @@ import ContactImg from "../assets/Contact.png";
     }
   }
 </style>
+
+<script>
+  if (typeof window !== "undefined") {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+    });
+  }
+</script>

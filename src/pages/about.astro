@@ -19,7 +19,7 @@ import About6Img from "../assets/About6.png";
 
   <main class="about-page">
     <!-- HERO -->
-    <section class="about-hero">
+    <section class="about-hero reveal">
       <div class="about-hero-left">
         <h1>About TÓKI</h1>
         <p>Born from a love of design, functionality and the planet</p>
@@ -34,7 +34,7 @@ import About6Img from "../assets/About6.png";
     </section>
 
     <!-- STORY-CARD (mørk boks) -->
-    <section class="story-card">
+    <section class="story-card reveal">
       <div class="story-text">
         <h2>TÓKI was founded with one belief – that packaging can be a force for good.</h2>
 
@@ -49,13 +49,13 @@ import About6Img from "../assets/About6.png";
     </section>
 
     <!-- WHAT DRIVES US -->
-    <section class="drives-section">
+    <section class="drives-section reveal">
       <div class="drives-title-wrapper">
         <h2>What drives us</h2>
       </div>
 
       <!-- ikonerne -->
-      <div class="about-icons">
+      <div class="about-icons reveal">
         <div class="icon-card">
           <Image src={About3Img} alt="Design for impact" />
           <h3>Design for impact</h3>
@@ -82,13 +82,32 @@ import About6Img from "../assets/About6.png";
       </div>
 
       <!-- knap centreret under ikonerne -->
-      <div class="drives-cta">
+      <div class="drives-cta reveal">
         <button class="btn-primary">Work with us</button>
       </div>
     </section>
   </main>
 
   <Footer />
+  <script>
+    if (typeof window !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      });
+    }
+  </script>
 </Layout>
 
 <style>
@@ -96,6 +115,19 @@ import About6Img from "../assets/About6.png";
     display: flex;
     flex-direction: column;
     gap: 90px;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* HERO */

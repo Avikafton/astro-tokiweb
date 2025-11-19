@@ -25,25 +25,25 @@ const data = await response.json();
   <Header />
 
   <main>
-    <div class="hero">
+    <div class="hero reveal">
       <h1>Sustainable packaging for a better future</h1>
       <Image src={IndexImg} alt="Index" class="hero-image" />
     </div>
 
-    <div class="cta">
+    <div class="cta reveal">
       <a href="/about">
         <button>Learn more</button>
       </a>
     </div>
 
-    <section class="toki-flow">
+    <section class="toki-flow reveal">
       <h2>Toki Flow</h2>
     </section>
-    <div class="toki-flow-image">
+    <div class="toki-flow-image reveal">
       <Image src={TokiflowImg} alt="Toki Flow Image" />
     </div>
 
-    <section class="left-title">
+    <section class="left-title reveal">
       <div class="title-wrapper">
         <h2>Smarter Choices for the Planet <Image src={LightImg} alt="Left Title Image" /></h2>
       </div>
@@ -52,7 +52,7 @@ const data = await response.json();
     <div class="grid">
       {
         data.map((item) => (
-          <a href={`/cards/${item.id}`} class="grid-item">
+          <a href={`/cards/${item.id}`} class="grid-item reveal">
             <h3>{item.Title}</h3>
             {item.imgs && <img src={item.imgs} alt={item.title} />}
           </a>
@@ -62,6 +62,18 @@ const data = await response.json();
   </main>
   <Footer />
   <style>
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity 0.6s ease-out,
+        transform 0.6s ease-out;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
     :global(body) {
       margin: 0;
       padding: 0;
@@ -325,4 +337,24 @@ const data = await response.json();
       }
     }
   </style>
+
+  <script>
+    if (typeof window !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      });
+    }
+  </script>
 </Layout>

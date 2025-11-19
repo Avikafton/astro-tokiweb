@@ -3,9 +3,9 @@ import { Image } from "astro:assets";
 import Logo from "../assets/logo.png";
 ---
 
-<footer class="footer">
+<footer class="footer reveal">
   <!-- Venstre: logo + tagline + links -->
-  <div class="footer-left">
+  <div class="footer-left reveal">
     <div class="footer-brand">
       <div class="footer-logo">
         <Image src={Logo} alt="TÓKI Logo" />
@@ -23,7 +23,7 @@ import Logo from "../assets/logo.png";
   </div>
 
   <!-- Midten: sociale medier -->
-  <div class="footer-socials">
+  <div class="footer-socials reveal">
     <a href="#" aria-label="Facebook" class="social-circle">
       <!-- Facebook inline SVG (hvid) -->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="social-icon">
@@ -44,7 +44,7 @@ import Logo from "../assets/logo.png";
   </div>
 
   <!-- Højre: Newsletter -->
-  <div class="footer-newsletter">
+  <div class="footer-newsletter reveal">
     <h3>Newsletter</h3>
 
     <form class="newsletter-box">
@@ -54,10 +54,43 @@ import Logo from "../assets/logo.png";
   </div>
 
   <!-- Bundlinje -->
-  <div class="footer-bottom">© 2025 TÓKI. All rights reserved</div>
+  <div class="footer-bottom reveal">© 2025 TÓKI. All rights reserved</div>
+
+  <script>
+    if (typeof window !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+      });
+    }
+  </script>
 </footer>
 
 <style>
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+
+  .reveal.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
   .footer {
     background-color: #143943;
     padding: 60px 80px 90px;
