@@ -2,6 +2,8 @@
 import Header from "../../components/Header.astro";
 import Layout from "../../layouts/Layout.astro";
 import Footer from "../../components/footer.astro";
+import { Image } from "astro:assets";
+import ProductCard from "../../assets/productcard.svg";
 export async function getStaticPaths() {
   const endpoint = "https://zkmujamnmqaduorxifhm.supabase.co/rest/v1/toki?select=*";
 
@@ -43,7 +45,7 @@ if (firstDotIndex !== -1) {
   <Header />
   <div class="hero reveal">
     <h1>{post.type} packaging</h1>
-    <img src="/src/assets/productcard.svg" alt="A bunch of Toki products" />
+    <Image src={ProductCard} alt="Index" class="product-image" />
   </div>
 
   <div class="packaging">
@@ -92,7 +94,7 @@ if (firstDotIndex !== -1) {
     margin-left: 100px;
     margin-right: 100px;
   }
-  .hero img {
+  .product-image {
     width: 500px;
     height: auto;
   }
