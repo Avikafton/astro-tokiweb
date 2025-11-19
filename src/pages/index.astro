@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import Footer from "../components/footer.astro";
 import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 import IndexImg from "../assets/index.png";
@@ -30,7 +31,9 @@ const data = await response.json();
     </div>
 
     <div class="cta">
-      <button>Learn more</button>
+      <a href="/about">
+        <button>Learn more</button>
+      </a>
     </div>
 
     <section class="toki-flow">
@@ -57,8 +60,12 @@ const data = await response.json();
       }
     </div>
   </main>
-
+  <Footer />
   <style>
+    :global(body) {
+      margin: 0;
+      padding: 0;
+    }
     .hero {
       display: flex;
       align-items: center;
@@ -214,6 +221,108 @@ const data = await response.json();
       width: auto;
       height: auto;
       object-fit: cover;
+    }
+    @media (max-width: 768px) {
+      :global(body) {
+        overflow-x: hidden;
+      }
+      main {
+        padding: 16px;
+        margin: 0;
+      }
+
+      .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+        text-align: left;
+      }
+
+      .hero-image {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .cta {
+        margin-bottom: 40px;
+      }
+
+      .cta button {
+        width: 100%;
+        max-width: 260px;
+      }
+
+      .toki-flow {
+        width: calc(100% + 32px);
+        margin: 40px -16px 24px -16px;
+        align-items: flex-end;
+      }
+
+      .toki-flow h2 {
+        font-size: 1.4rem;
+        padding: 10px 16px;
+        text-align: right;
+      }
+
+      .toki-flow-image {
+        margin-top: 16px;
+        padding: 0 8px;
+      }
+
+      .toki-flow-image img {
+        max-width: 100%;
+      }
+
+      .left-title {
+        width: calc(100% + 32px);
+        margin: 40px -16px 24px -16px;
+      }
+
+      .title-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+        gap: 12px;
+      }
+
+      .left-title h2 {
+        padding: 0;
+        font-size: 1.4rem;
+        text-align: left;
+      }
+
+      .title-wrapper img {
+        max-width: 100px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin: 0 0 32px 0;
+        width: 100%;
+      }
+
+      .grid-item {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      .grid-item img {
+        max-width: 100px;
+        width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
     }
   </style>
 </Layout>

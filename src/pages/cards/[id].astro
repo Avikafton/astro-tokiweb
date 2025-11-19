@@ -1,6 +1,7 @@
 ---
 import Header from "../../components/Header.astro";
 import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/footer.astro";
 export async function getStaticPaths() {
   const endpoint = "https://zkmujamnmqaduorxifhm.supabase.co/rest/v1/toki?select=*";
 
@@ -61,6 +62,7 @@ if (firstDotIndex !== -1) {
       </div>
     </div>
   </div>
+  <Footer />
 </Layout>
 
 <style>
@@ -116,6 +118,12 @@ if (firstDotIndex !== -1) {
     max-width: 600px;
     margin: 40px auto;
   }
+  .grid-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
   .about-product {
     background-color: #143943;
     color: #f9fcf9;
@@ -167,5 +175,67 @@ if (firstDotIndex !== -1) {
     border-radius: 20px;
     border: none;
     transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      margin-left: 0;
+      margin-right: 0;
+      gap: 20px;
+    }
+
+    .hero img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+    }
+
+    .packaging h2 {
+      font-size: 1.4rem;
+      padding: 10px 20px;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    .packaging h2.pure {
+      margin-left: 0;
+      padding: 10px 20px;
+      width: auto;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      text-align: left;
+    }
+
+    .grid-item {
+      max-width: 100%;
+      margin: 20px 16px;
+      padding: 20px;
+    }
+
+    .about-product {
+      max-width: 100%;
+      margin: 20px 16px 40px 16px;
+      padding: 20px;
+    }
+
+    .about-intro {
+      font-size: 1.1rem;
+    }
+
+    .cta {
+      margin-bottom: 10px;
+      padding-top: 30px;
+    }
+
+    .cta button {
+      width: 100%;
+      max-width: 260px;
+    }
   }
 </style>

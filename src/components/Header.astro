@@ -6,7 +6,9 @@ import Logo from "../assets/logo.png";
 <header>
   <nav class="navbar">
     <div class="logo">
-      <Image src={Logo} alt="Toki logo" class="logo" />
+      <a href="/">
+        <Image src={Logo} alt="Toki logo" class="logo" />
+      </a>
     </div>
     <ul class="nav-links">
       <li><a href="/">home</a></li>
@@ -29,8 +31,13 @@ import Logo from "../assets/logo.png";
   }
 
   .logo img {
-    height: 50px;
+    height: 75px;
     width: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .logo img:hover {
+    transform: scale(1.1) rotate(2deg);
   }
 
   .nav-links {
@@ -45,10 +52,36 @@ import Logo from "../assets/logo.png";
     text-decoration: none;
     color: white;
     font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1;
     transition: opacity 0.2s ease;
   }
 
   .nav-links a:hover {
     opacity: 0.7;
+    color: #b2f432;
+  }
+
+  @media (max-width: 700px) {
+    header {
+      padding: 10px 20px;
+    }
+
+    .navbar {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .logo img {
+      height: 60px;
+    }
+
+    .nav-links {
+      gap: 20px;
+    }
+
+    .nav-links a {
+      font-size: 1rem;
+    }
   }
 </style>
