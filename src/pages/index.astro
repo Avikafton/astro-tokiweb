@@ -45,7 +45,7 @@ const data = await response.json();
 
     <section class="left-title reveal">
       <div class="title-wrapper">
-        <h2>Smarter Choices for the Planet <Image src={LightImg} alt="Left Title Image" /></h2>
+        <h2>Our solutions <Image src={LightImg} alt="Left Title Image" /></h2>
       </div>
     </section>
 
@@ -74,9 +74,11 @@ const data = await response.json();
       opacity: 1;
       transform: translateY(0);
     }
-    :global(body) {
+    :global(html, body) {
       margin: 0;
       padding: 0;
+      max-width: 100%;
+      overflow-x: hidden;
     }
     .hero {
       display: flex;
@@ -145,7 +147,6 @@ const data = await response.json();
 
     .grid-item h3 {
       color: #f9fcf9;
-      margin-bottom: 10px;
     }
 
     .grid-item img {
@@ -162,6 +163,13 @@ const data = await response.json();
       width: 25%;
     }
 
+    .grid-item:hover {
+      background-color: #1a4b56;
+      transform: scale(1.03);
+      transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
+    }
     .toki-flow {
       width: 85vw;
       overflow: hidden;
@@ -199,37 +207,42 @@ const data = await response.json();
     }
 
     .left-title {
-      width: 85vw;
+      width: 100vw;
+      margin: 100px 0;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+
       overflow: hidden;
       display: flex;
-      justify-content: flex-start;
-      margin: 100px -600px;
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
+      flex-direction: column;
+      align-items: flex-start;
+
       color: #f9fcf9;
-      background-color: #143943;
     }
 
     .title-wrapper {
-      display: flex; /* Tekst og billede på samme linje */
-      align-items: center; /* Vertikal centrering */
-      padding: 20px 150px; /* lidt padding inde i kassen */
-      gap: 20px; /* afstand mellem tekst og billede */
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
     }
 
     .left-title h2 {
       font-size: 2rem;
-      display: inline-block;
-      padding: 60px 700px 60px 450px;
+      margin: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      color: #f9fcf9;
+      background-color: #143943;
+      text-align: right;
+      padding: 10px 20px 10px 280px;
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
-      text-align: right;
-      margin: 0;
-      flex-shrink: 0;
     }
 
     .title-wrapper img {
-      max-width: 150px; /* gør billedet synligt og proportionelt */
+      max-width: 80px;
       width: auto;
       height: auto;
       object-fit: cover;
@@ -293,8 +306,9 @@ const data = await response.json();
       }
 
       .left-title {
-        width: calc(100% + 32px);
-        margin: 40px -16px 24px -16px;
+        width: 100vw;
+        margin: 40px 0 24px 0;
+        margin-left: calc(50% - 50vw);
       }
 
       .title-wrapper {

@@ -16,7 +16,7 @@ import ContactImg from "../assets/Contact.png";
       <div class="contact-hero-text">
         <h1>Contact</h1>
         <p>We’d love to hear from you – whether you’re curious, collaborating, or ready to rethink packaging.</p>
-        <button class="primary-btn">Send a message</button>
+        <button class="primary-btn" onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth', block: 'start' });"> Send a message </button>
       </div>
 
       <div class="contact-hero-image reveal">
@@ -49,7 +49,7 @@ import ContactImg from "../assets/Contact.png";
         </div>
       </div>
 
-      <div class="build-form-wrapper">
+      <div class="build-form-wrapper" id="contact-form">
         <div class="contact-form-card reveal">
           <div class="form-group">
             <label for="name">Name</label>
@@ -131,6 +131,10 @@ import ContactImg from "../assets/Contact.png";
   .primary-btn:hover {
     background-color: #b2f432;
     transform: scale(1.05);
+  }
+
+  #contact-form {
+    scroll-margin-top: 80px;
   }
 
   /* BUILD SOMETHING + FORM */
