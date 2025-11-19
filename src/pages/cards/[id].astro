@@ -1,4 +1,6 @@
 ---
+import Header from "../../components/Header.astro";
+import Layout from "../../layouts/Layout.astro";
 export async function getStaticPaths() {
   const endpoint = "https://zkmujamnmqaduorxifhm.supabase.co/rest/v1/toki?select=*";
 
@@ -23,6 +25,147 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params;
 const { post } = Astro.props;
+
+const fullDescription = post.description || "";
+const firstDotIndex = fullDescription.indexOf(".");
+
+let intro = fullDescription;
+let body = "";
+
+if (firstDotIndex !== -1) {
+  intro = fullDescription.slice(0, firstDotIndex + 1).trim();
+  body = fullDescription.slice(firstDotIndex + 1).trim();
+}
 ---
 
-<h1>{id}: {post.name}</h1>
+<Layout>
+  <Header />
+  <div class="hero">
+    <h1>{post.type} packaging</h1>
+    <img src="/src/assets/productcard.svg" alt="A bunch of Toki products" />
+  </div>
+
+  <div class="packaging">
+    <h2>Sustainable {post.type} packaging</h2>
+    <div class="grid-item">
+      {post.imgs && <img src={post.imgs} alt={post.title} />}
+    </div>
+    <h2 class="pure">Pure by design</h2>
+    <div class="about-product">
+      <p class="about-intro">{intro}</p>
+      <p class="about-body">{body}</p>
+      <div class="cta">
+        <a href="/about">
+          <button>Learn more</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    padding: 100px 100px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+  .hero img {
+    width: 500px;
+    height: auto;
+  }
+
+  .packaging {
+    margin: 0;
+  }
+
+  .packaging h2 {
+    font-size: 2rem;
+    color: #f9fcf9;
+    background-color: #143943;
+    display: inline-block;
+    padding: 10px 60px 10px 185px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    text-align: left;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .packaging h2.pure {
+    margin-left: auto;
+    display: block;
+    width: fit-content;
+    padding: 10px 185px 10px 60px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    text-align: center;
+  }
+
+  .grid-item {
+    background-color: #143943;
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px;
+    max-width: 600px;
+    margin: 40px auto;
+  }
+  .about-product {
+    background-color: #143943;
+    color: #f9fcf9;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px 40px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .about-intro {
+    white-space: pre-line;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  .about-body {
+    white-space: pre-line;
+  }
+
+  .cta {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    padding-top: 50px;
+  }
+
+  .cta button {
+    font-family: "Baloo 2";
+    padding: 10px 50px;
+    font-size: 1.2rem;
+    background-color: #4db652;
+    color: #f9fcf9;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transition:
+      transform 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .cta button:hover {
+    padding: 10px 50px;
+    font-size: 1.2rem;
+    background-color: #b2f432;
+    color: #f9fcf9;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    transform: scale(1.05);
+  }
+</style>
