@@ -39,8 +39,11 @@ const data = await response.json();
     <section class="toki-flow reveal">
       <h2>Toki Flow</h2>
     </section>
-      
-    <div id="pointer" style="
+
+    <div
+      id="pointer"
+      class="reveal"
+      style="
         position: absolute;
         top: 845px;
         left: 50%;
@@ -51,11 +54,16 @@ const data = await response.json();
         border-right: 20px solid transparent;
         border-top: 40px solid #b2f432; /* spids nedad */
         z-index: 10;
-      "></div>
+      "
+    >
+    </div>
 
-      <div style="position: relative; display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
-        <div id="tokiText" style="
-            width: 250px;
+    <div class="toki-flow-interactive reveal" style="position: relative; display: flex; justify-content: center; align-items: flex-start; gap: 20px;">
+      <div
+        id="tokiText"
+        class="reveal"
+        style="
+            width: 280px;
             height: 350px;
             color: #f9fcf9;
             background-color: #143943;
@@ -70,18 +78,20 @@ const data = await response.json();
             visibility: visible;
             opacity: 1;
             transition: opacity 0.3s ease;
-        ">
-          <strong>Click the wheel to learn about Toki Flow!</strong>
-        </div>
-      
-        <div class="toki-flow-image" id="tokiWheel" style="width: 400px; cursor: pointer; transition: transform 0.5s ease-out;">
-          <Image src={TokiflowImg} alt="Toki Flow Image" style="width: 100%; height: auto; display: block;" />
-        </div>
+        "
+      >
+        <strong>Click the wheel to learn about Toki Flow!</strong>
       </div>
+
+      <div class="toki-flow-image reveal" id="tokiWheel" style="width: 400px; cursor: pointer; transition: transform 0.5s ease-out;">
+        <Image src={TokiflowImg} alt="Toki Flow Image" style="width: 100%; height: auto; display: block;" />
+      </div>
+    </div>
 
     <section class="left-title reveal">
       <div class="title-wrapper">
-        <h2>Smarter Choices for the Planet <Image src={LightImg} alt="Left Title Image" /></h2>
+        <h2>Our choices</h2>
+        <Image src={LightImg} alt="Left Title Image" class="title-icon" />
       </div>
     </section>
 
@@ -96,8 +106,6 @@ const data = await response.json();
       }
     </div>
   </main>
-
-
 
   <Footer />
   <style>
@@ -180,6 +188,17 @@ const data = await response.json();
       border-radius: 20px;
       text-align: center;
       padding: 20px;
+      cursor: pointer;
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background-color 0.3s ease;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      background-color: #184954;
     }
 
     .grid-item h3 {
@@ -224,14 +243,16 @@ const data = await response.json();
       box-sizing: border-box;
     }
 
-  
-
     .left-title {
-      width: 85vw;
+      position: relative;
+      left: 50%;
+      margin-left: -50vw;
+      width: 50vw;
       overflow: hidden;
       display: flex;
       justify-content: flex-start;
-      margin: 100px -600px;
+      margin-top: 100px;
+      margin-bottom: 100px;
       border-top-right-radius: 20px;
       border-bottom-right-radius: 20px;
       color: #f9fcf9;
@@ -239,33 +260,29 @@ const data = await response.json();
     }
 
     .title-wrapper {
-      display: flex; /* Tekst og billede på samme linje */
-      align-items: center; /* Vertikal centrering */
-      padding: 20px 150px; /* lidt padding inde i kassen */
-      gap: 20px; /* afstand mellem tekst og billede */
+      display: flex;
+      align-items: center;
+      padding: 20px 40px;
+      gap: 20px;
+      box-sizing: border-box;
+      width: 100%;
+      justify-content: flex-end;
     }
 
     .left-title h2 {
       font-size: 2rem;
-      display: inline-block;
-      padding: 60px 700px 60px 450px;
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
-      text-align: right;
       margin: 0;
-      flex-shrink: 0;
+      text-align: right;
+      white-space: nowrap;
     }
 
     .title-wrapper img {
-      max-width: 150px; /* gør billedet synligt og proportionelt */
+      max-width: 60px; /* gør billedet synligt og proportionelt */
       width: auto;
       height: auto;
       object-fit: cover;
     }
 
-
-
-    
     @media (max-width: 768px) {
       :global(body) {
         overflow-x: hidden;
@@ -327,6 +344,7 @@ const data = await response.json();
       .left-title {
         width: calc(100% + 32px);
         margin: 40px -16px 24px -16px;
+        border-radius: 20px;
       }
 
       .title-wrapper {
@@ -334,6 +352,7 @@ const data = await response.json();
         align-items: flex-start;
         padding: 16px;
         gap: 12px;
+        justify-content: flex-start;
       }
 
       .left-title h2 {
@@ -390,43 +409,43 @@ const data = await response.json();
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-  let currentRotation = 0;
-  const wheel = document.getElementById("tokiWheel");
-  const textBox = document.getElementById("tokiText");
+      let currentRotation = 0;
+      const wheel = document.getElementById("tokiWheel");
+      const textBox = document.getElementById("tokiText");
 
-  const messages = [
-  "<strong>INSIGHT:</strong> We conduct extensive research to identify opportunities for sustainable packaging solutions. This involves analyzing raw materials, assessing environmental impact, understanding consumer behavior, and evaluating market trends. Our goal is to uncover actionable insights that help businesses reduce their ecological footprint while staying innovative and competitive in the market.",
+      const messages = [
+        "<strong>INSIGHT:</strong> We conduct extensive research to identify opportunities for sustainable packaging solutions. This involves analyzing raw materials, assessing environmental impact, understanding consumer behavior, and evaluating market trends. Our goal is to uncover actionable insights that help businesses reduce their ecological footprint while staying innovative and competitive in the market.",
 
-  "<strong>DESIGN DNA:</strong> We develop packaging concepts that combine aesthetics, functionality, and sustainability. Every design decision—from material selection to shape and branding—is carefully considered to minimize waste, energy consumption, and carbon emissions. Our designs aim to create a memorable user experience while adhering to eco-friendly principles.",
+        "<strong>DESIGN DNA:</strong> We develop packaging concepts that combine aesthetics, functionality, and sustainability. Every design decision—from material selection to shape and branding—is carefully considered to minimize waste, energy consumption, and carbon emissions. Our designs aim to create a memorable user experience while adhering to eco-friendly principles.",
 
-  "<strong>SOLUTION:</strong> Based on our research and design DNA, we create concrete solutions that include prototypes, testing methods, and optimized production techniques. We focus on innovative approaches such as biodegradable materials, reusable packaging, and modular designs that can be scaled efficiently while maintaining high-quality standards.",
+        "<strong>SOLUTION:</strong> Based on our research and design DNA, we create concrete solutions that include prototypes, testing methods, and optimized production techniques. We focus on innovative approaches such as biodegradable materials, reusable packaging, and modular designs that can be scaled efficiently while maintaining high-quality standards.",
 
-  "<strong>IDEAS:</strong> We continuously generate new ideas for products and services that contribute to a circular economy. Our brainstorming sessions and collaborative workshops emphasize creativity, sustainability, and practicality, encouraging novel solutions that are both environmentally responsible and commercially viable.",
+        "<strong>IDEAS:</strong> We continuously generate new ideas for products and services that contribute to a circular economy. Our brainstorming sessions and collaborative workshops emphasize creativity, sustainability, and practicality, encouraging novel solutions that are both environmentally responsible and commercially viable.",
 
-  "<strong>SCALING:</strong> We strategize how to implement our solutions on a larger scale. This includes planning manufacturing processes, logistics, distribution, and marketing strategies that enable widespread adoption. Our focus is on empowering businesses to transition to sustainable packaging practices without compromising efficiency or profitability."
-];
+        "<strong>SCALING:</strong> We strategize how to implement our solutions on a larger scale. This includes planning manufacturing processes, logistics, distribution, and marketing strategies that enable widespread adoption. Our focus is on empowering businesses to transition to sustainable packaging practices without compromising efficiency or profitability.",
+      ];
 
-  wheel.addEventListener("click", () => {
-    currentRotation -= 72;
-    wheel.style.transform = `rotate(${currentRotation}deg)`;
+      wheel.addEventListener("click", () => {
+        currentRotation -= 72;
+        wheel.style.transform = `rotate(${currentRotation}deg)`;
 
-    const index = ((-currentRotation / 72) % messages.length + messages.length) % messages.length;
-    textBox.innerHTML = messages[index];
+        const index = (((-currentRotation / 72) % messages.length) + messages.length) % messages.length;
+        textBox.innerHTML = messages[index];
 
-    // vis boksen hvis den var skjult
-    textBox.style.visibility = "visible";
-    textBox.style.opacity = "1";
-  });
+        // vis boksen hvis den var skjult
+        textBox.style.visibility = "visible";
+        textBox.style.opacity = "1";
+      });
 
-  textBox.addEventListener("click", () => {
-    if (textBox.style.visibility === "hidden") {
-      textBox.style.visibility = "visible";
-      textBox.style.opacity = "1";
-    } else {
-      textBox.style.visibility = "hidden";
-      textBox.style.opacity = "0";
-    }
-  });
-});
+      textBox.addEventListener("click", () => {
+        if (textBox.style.visibility === "hidden") {
+          textBox.style.visibility = "visible";
+          textBox.style.opacity = "1";
+        } else {
+          textBox.style.visibility = "hidden";
+          textBox.style.opacity = "0";
+        }
+      });
+    });
   </script>
 </Layout>
